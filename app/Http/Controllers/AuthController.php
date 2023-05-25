@@ -34,6 +34,7 @@ class AuthController extends Controller
         return response()->json([
             'message' => 'Successfully logged in',
             'accessToken' => $token,
+            'user'=>auth()->user()
         ], 200);
     }
 
@@ -46,5 +47,20 @@ class AuthController extends Controller
                 'message' => 'Successfully logged out'
             ], 200);
         }
+    }
+
+    public function me()
+    {
+        return response()->json([
+            "user"=>auth()->user()
+        ], 200);
+    }
+
+    public function allUser()
+    {
+        $user = User::all();
+        return response()->json([
+            'users' => $user
+        ], 200);
     }
 }

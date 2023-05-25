@@ -68,7 +68,18 @@ class DestinationController extends Controller
      */
     public function show(string $id)
     {
-        //
+        $des = Destination::where('id', $id)->first();
+
+        if($des){
+            return response()->json([
+                'destination' => $des
+            ], 200);
+        }
+        if(!$des){
+            return response()->json([
+                'message' => 'Invalid id'
+            ], 404);
+        }
     }
 
     /**
